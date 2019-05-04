@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <a href="/meal" class="btn btn btn-info">
-            < Back
-        </a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <a href="/meal" class="btn btn btn-info">
+                < Back
+            </a>
+        </div>
     </div>
 </div>
 <h2 class="text-center meal-title">{{ $meal->type }} of the {{ $meal->date }}</h2>
