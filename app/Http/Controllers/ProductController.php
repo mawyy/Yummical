@@ -50,15 +50,18 @@ class ProductController extends Controller
         $url = 'https://fr.openfoodfacts.org/api/v0/produit/' . $value['code'] .'.json';
         $data = json_decode(file_get_contents($url), true);
 
+        if (empty($data['product']['product_name'])) {
+            return Redirect::back()->with('error','Please enter a correct code');
+        }
+        
         $product = Product::where('code', $value['code'])->first();
-        if ($product == null && !empty($data['product']['product_name'])){
+        if ($product == null) {
             $product = new Product;
 
+            $hasImage = isset($data['product']['image_url']);
             $product->name = $data['product']['product_name'];
-
             $product->code = $data['code'];
-
-            $product->url = (isset ($data['product']['image_url'])) ? $data['product']['image_url'] : "";
+            $product->url = $hasImage ? $data['product']['image_url'] : "";
 
             if (isset ($data['product']['nutriments']['energy_value'])) {
                 if ($data['product']['nutriments']['energy_unit'] == 'kJ') {
@@ -71,7 +74,6 @@ class ProductController extends Controller
             }
             $product->save();
         }
-        
         
         $meal->products()->attach($product->id);
         

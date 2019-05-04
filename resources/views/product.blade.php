@@ -28,7 +28,7 @@
                             <!-- Product Code -->
                             <label for="meal" class="col-sm-3 control-label">Code Product</label>
                             <div class="col-sm-12">
-                                <input class="code form-control" type="number" name="code">                
+                                <input class="code form-control" name="code">                
                             </div>
                         </div>
 

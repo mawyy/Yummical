@@ -76,7 +76,7 @@
 
                     <div class="panel-body">                        
                             
-                        @foreach ($mealsByDateWithCal as $mealByDateWithCal)   
+                        @foreach ($mealsByDateWithCal as $mealByDateWithCal)
                         <div class="day-table">
                             <div>
                                 <h5 class="day-title">Day {{ $mealByDateWithCal->date }} | 
@@ -120,8 +120,12 @@
                     </div>
                 </div>
             </div>
+            <a href="/statistics" class="btn btn-info">
+                Show my statistics
+            </a>
         </div>
         @endif
+
     </div>
 </div>
 @endsection

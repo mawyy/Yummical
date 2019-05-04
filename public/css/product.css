@@ -21,7 +21,11 @@
     margin-left: auto;
     margin-right: auto;
 }
-
+.stat-card{
+    display: inline-block;
+    margin-bottom: 20px;
+    width: 100%;
+}
 .stat-img img{
     height: 100px;
 }

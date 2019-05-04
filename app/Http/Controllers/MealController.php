@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
+
 use Validator;
 use Redirect;
 use App\Meal;
@@ -21,9 +22,10 @@ class MealController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
+    public function index(Request $request) {
         //$meals = Meal::all();
-        $meals = Meal::orderBy('date', 'asc')->get();
+        $user = $request->user();
+        $meals = $user->meals()->orderBy('date', 'asc')->get();
         $mealsByDate = $meals->groupBy('date');
         $tot_cal_meal = 0;
 
@@ -65,14 +67,12 @@ class MealController extends Controller
      */
     public function store(Request $request) {
 
-        $value = request::all();
-
         $rules = [
             'meal' => 'required|string',
             'date' => 'required|date',
         ];
 
-        $validator = Validator::make($value, $rules, [
+        $validator = Validator::make($request->all(), $rules, [
             'meal.required' => 'Please enter a correct type of meal',
             'meal.string' => 'Please enter a correct type of meal',
             'date.required' => 'Please enter a correct date (dd/mm/yyyy)',
@@ -87,10 +87,13 @@ class MealController extends Controller
 
         $meal = new Meal;
 
-        $meal->type = $value['meal'];
-        $meal->date = $value['date'];
+        $meal->type = $request->meal;
+        $meal->date = $request->date;
 
         $meal->save();
+
+        $user = $request->user();
+        $user->meals()->attach($meal->id);
 
         return Redirect::back()->with('success','Meal created successfully!');
     }
@@ -98,9 +101,10 @@ class MealController extends Controller
     /**
      * Delete a meal
      */
-    public function deleteMeal($id) {
+    public function deleteMeal($id, Request $request) {
+        $user = $request->user();
+        $user->meals()->detach($id);
         Meal::destroy($id);
-
         return Redirect::back()->with('success','Meal deleted successfully!');
     }
 
