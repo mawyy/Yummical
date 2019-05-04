@@ -22,10 +22,11 @@ Route::prefix('meal')->name('meal.')->group(function () {
 
     Route::post('/', 'MealController@store')->name('store');
 
-    Route::delete('/{id}', 'MealController@delete')->name('delete');
+    Route::delete('/{id}', 'MealController@deleteMeal')->name('deleteMeal');
 
     Route::get('/{id}/edit', 'MealController@show')->name('index');
 
     Route::post('/{id}/edit', 'ProductController@store')->name('storeProducts');
 
+    Route::delete('/{meal_id}/{product_id}', 'MealController@deleteProduct')->name('deleteProduct');
 });

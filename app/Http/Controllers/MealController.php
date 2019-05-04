@@ -96,18 +96,21 @@ class MealController extends Controller
     }
 
     /**
-     * Edit a meal
-     */
-    public function edit($id) {
-
-    }
-
-    /**
      * Delete a meal
      */
-    public function delete($id) {
+    public function deleteMeal($id) {
         Meal::destroy($id);
 
         return Redirect::back()->with('success','Meal deleted successfully!');
+    }
+
+    /**
+     * Delete a product
+     */
+    public function deleteProduct($meal_id, $product_id) {
+        $meal = Meal::findOrFail($meal_id);
+        $meal->products()->detach($product_id);
+
+        return Redirect::back()->with('success','Food deleted successfully!');
     }
 }

@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <a href="/meal" class="btn btn btn-info">
+            < Back
+        </a>
+    </div>
+</div>
 <h2 class="text-center meal-title">{{ $meal->type }} of the {{ $meal->date }}</h2>
 <div class="container">
     <div class="row justify-content-center">
@@ -49,7 +55,11 @@
                             </div>
                             <div class="food-name"> {{ $product->name }} </div>
                             <div>
-                                <button type="button" class="btn btn-outline-danger btn-delete-food" >Delete Food</button>
+                                <form action="{{ url('/meal', ['meal_id' => $meal->id, 'product_id' => $product->id]) }}" method="post">
+                                    <input class="btn btn-outline-danger" type="submit" value="Delete Food" />
+                                    <input type="hidden" name="_method" value="delete" />
+                                    {!! csrf_field() !!}
+                                </form>
                             </div>
                         </div>                                
                         @endforeach                            

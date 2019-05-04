@@ -97,7 +97,7 @@
                                         </td>
                                         <!-- Details -->
                                         <td>
-                                            <a href="/meal/{{ $meal->id }}/edit">
+                                            <a href="/meal/{{ $meal->id }}/edit" class="btn btn-info">
                                                 Details
                                             </a>
                                         </td>
