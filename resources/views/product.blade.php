@@ -53,7 +53,7 @@
                         <!-- Food Name -->
                         <div class="food-card">
                             <div class="food-img">
-                                <img src="{{ $product->url }}" alt="{{ $product->name }}" title="{{ $product->name }}" height="100px">
+                                <img src="{{ $product->url }}" alt="{{ $product->name }}" title="{{ $product->name }}" height="100px"/>
                             </div>
                             <div class="food-name"> {{ $product->name }} </div>
                             <div>

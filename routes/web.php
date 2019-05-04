@@ -32,7 +32,4 @@ Route::prefix('meal')->name('meal.')->group(function () {
 
 });
 
-Route::get('/show5HigherCal', 'StatisticsController@show5HigherCal')->name('show5HigherCal');
-
-Route::get('/show5LowerCal', 'StatisticsController@show5LowerCal')->name('show5LowerCal');
-Route::get('/show5HigherCalTotal', 'StatisticsController@show5HigherCalTotal')->name('show5HigherCalTotal');
+Route::get('/statistics', 'StatisticsController@statistics')->name('statistics');
