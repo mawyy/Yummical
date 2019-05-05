@@ -5,8 +5,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <h5 class="card-header text-center">Dashboard</h5>
+            <div class="card border-primary">
+                <h5 class="card-header text-center text-white bg-primary">Dashboard</h5>
                                
                 <div class="card-body">
                     @if (session('status'))
@@ -26,8 +26,9 @@
 
         <!-- ## Card display Add form ## -->
         <div class="col-md-8">
+        @include('flash-message')
             <div class="card">
-                <h5 class="card-header text-center">New meal</h5>
+                <h5 class="card-header text-center bg-info">New meal</h5>
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('errors')
@@ -56,7 +57,7 @@
                         <!-- Add Meal Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <button type="submit" class="btn btn-info">Add Meal</button>
+                                <button type="submit" class="btn btn-primary">Add Meal</button>
                             </div>
                         </div>
                     </form>
@@ -69,18 +70,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="panel panel-default">
-                    <h5 class="card-header text-center panel-heading">
-                        Current Meals
-                    </h5>
-                    @include('flash-message')
-
+                    <h5 class="card-header text-center panel-heading bg-info">Current Meals</h5>
                     <div class="panel-body">                        
                             
                         @foreach ($mealsByDateWithCal as $mealByDateWithCal)
-                        <div class="day-table">
-                            <div>
-                                <h5 class="day-title">Day {{ $mealByDateWithCal->date }} | 
-                                    Total calories of the day : {{ $mealByDateWithCal->dayCalories }} <h5>
+                        <div class="day-table border border-secondary">
+                            <div class="day-title">
+                                <h5>Day {{ $mealByDateWithCal->date }}</h5> 
+                                <h6>Total calories of the day: <b>{{ $mealByDateWithCal->dayCalories }} kCal<b></h6>
                             </div>
                             <table class="table table-striped meal-table">
                                 <!-- Table Body -->
@@ -89,15 +86,15 @@
                                 @foreach ($mealByDateWithCal->meals as $meal)                          
                                     <tr>
                                         <!-- Meal Name -->
-                                        <td class="table-text" width="150px">
+                                        <td width="150px">
                                             <div>{{ $meal->type }}</div>
                                         </td>
-                                        <td class="table-text" width="150px">
+                                        <td width="150px">
                                             <div>{{ $meal->getCalories() }} kCal</div>
                                         </td>
                                         <!-- Details -->
                                         <td>
-                                            <a href="/meal/{{ $meal->id }}/edit" class="btn btn-info">
+                                            <a href="/meal/{{ $meal->id }}/edit" class="btn btn-outline-primary">
                                                 Details
                                             </a>
                                         </td>
@@ -120,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/statistics" class="btn btn-info">
+            <a href="/statistics" class="btn btn-success">
                 Show my statistics
             </a>
         </div>

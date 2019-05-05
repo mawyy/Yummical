@@ -25,7 +25,7 @@ class MealController extends Controller
     public function index(Request $request) {
         //$meals = Meal::all();
         $user = $request->user();
-        $meals = $user->meals()->orderBy('date', 'asc')->get();
+        $meals = $user->meals()->orderBy('date', 'desc')->get();
         $mealsByDate = $meals->groupBy('date');
         $tot_cal_meal = 0;
 
@@ -113,7 +113,12 @@ class MealController extends Controller
      */
     public function deleteProduct($meal_id, $product_id) {
         $meal = Meal::findOrFail($meal_id);
-        $meal->products()->detach($product_id);
+        //$meal->products()->detach($product_id);
+        DB::table($meal->products()->getTable())
+            ->where('meal_id', '=', $meal_id)
+            ->where('product_id', '=', $product_id)
+            ->limit(1)
+            ->delete();
 
         return Redirect::back()->with('success','Food deleted successfully!');
     }

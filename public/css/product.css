@@ -7,17 +7,28 @@
     margin : 20px;
     margin-bottom: 20px;
 }
-.food-img {
+.food-img img{
+    display: block;
     height : 100px;
     margin-left: auto;
     margin-right: auto;
 }
 .food-name {
-    margin: 0 auto 10px auto;
+    margin: 0 auto 0 auto;
     max-width: 150px;
     text-align: center;
 }
-.btn-delete-food {
+.food-code {
+    margin: 0 auto 10px auto;
+    max-width: 150px;
+    text-align: center;
+    font-size: 10px;
+}
+.card-header h6 {
+    margin: 0;
+}
+.btn-delete-food input {
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }

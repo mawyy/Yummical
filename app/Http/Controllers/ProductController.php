@@ -37,7 +37,7 @@ class ProductController extends Controller
         ];
 
         $validator = Validator::make($value, $rules, [
-            'code.required' => 'Please enter a correct code',
+            'code.required' => 'Please enter a code',
             'code.string' => 'Please enter a correct code',
         ]);
 

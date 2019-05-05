@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <a href="/meal" class="btn btn btn-info">
+            <a href="/meal" class="btn btn btn-dark">
                 < Back
             </a>
         </div>
@@ -14,12 +14,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        @include('flash-message')
             <div class="card">
-                <h5 class="card-header text-center">Add new food</h5>
+                <h5 class="card-header text-center bg-warning">Add new food</h5>
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('errors')
-                    @include('flash-message')
                     
                     <!-- New Product Form -->
                     <form method="POST" class="form-horizontal">
@@ -35,7 +35,7 @@
                         <!-- Add Meal Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <button type="submit" class="btn btn-info">Add Product</button>
+                                <button type="submit" class="btn btn-primary">Add Product</button>
                             </div>
                         </div>
                     </form>
@@ -45,19 +45,22 @@
         @if (count($products) > 0)
         <div class="col-md-8">
             <div class="card">
-                <h5 class="card-header text-center">Food of the {{ $meal->type }} (<b>{{ $tot_cal_meal }} kcal total</b>)</h5>
+                <div class="card-header text-center bg-warning">
+                    <h5>Food</h5>
+                    <h6>(<b>{{ $tot_cal_meal }} kcal total</b> for 100g/ml of each)</h6> 
+                </div>              
                 <div class="panel-body">
-                    <div class="table table-striped">
+                    <div>
                         <!-- Food of the Meal -->                            
-                        @foreach ($products as $product)                                
-                        <!-- Food Name -->
+                        @foreach ($products as $product) 
                         <div class="food-card">
                             <div class="food-img">
-                                <img src="{{ $product->url }}" alt="{{ $product->name }}" title="{{ $product->name }}" height="100px"/>
+                                <img src="{{ $product->url }}" alt="{{ $product->name }}" title="{{ $product->name }}"/>
                             </div>
-                            <div class="food-name"> {{ $product->name }} </div>
+                            <div class="food-name">{{ $product->name }}</div>
+                            <div class="food-code">{{ $product->code }}</div>
                             <div>
-                                <form action="{{ url('/meal', ['meal_id' => $meal->id, 'product_id' => $product->id]) }}" method="post">
+                                <form  class="btn-delete-food" action="{{ url('/meal', ['meal_id' => $meal->id, 'product_id' => $product->id]) }}" method="post">
                                     <input class="btn btn-outline-danger" type="submit" value="Delete Food" />
                                     <input type="hidden" name="_method" value="delete" />
                                     {!! csrf_field() !!}

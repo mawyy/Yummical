@@ -9,7 +9,8 @@
     font-weight: bold;
 }
 .day-table {
-    margin : 10px;
+    margin: 10px;
+    padding-top: 10px;
 }
 .day-title {
     margin-left: auto;
